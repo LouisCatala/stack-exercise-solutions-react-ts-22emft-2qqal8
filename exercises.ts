@@ -103,30 +103,40 @@ export const toBinaryStringFromStack = (n: number): string => {
 };
 
 export const copyStack = <T>(s: Stack<T>): Stack<T> => {
-  if (s.isEmpty()) return new Stack<T>();
-  let medium = new Stack<T>();
-  copyHelper(s, medium);
-  let final = new Stack<T>();
-  restpreHelper(medium, s, final);
-  return final;
-};
+  let result = new Stack<T>();
+  if (s.isEmpty()) return new Stack();
+  else {
+    let topElement = s.pop();
+    result = copyStack(s);
+    result.push(topElement);
+    s.push(topElement);
+    return result;
+  }
 
-const copyHelper = <T>(from: Stack<T>, to: Stack<T>) => {
-  if (from.isEmpty()) return;
-  to.push(from.pop());
-  return copyHelper(from, to);
-};
+  //   if (s.isEmpty()) return new Stack<T>();
+  //   let medium = new Stack<T>();
+  //   copyHelper(s, medium);
+  //   let final = new Stack<T>();
+  //   restpreHelper(medium, s, final);
+  //   return final;
+  // };
 
-const restpreHelper = <T>(
-  from: Stack<T>,
-  origin: Stack<T>,
-  final: Stack<T>
-) => {
-  if (from.isEmpty()) return;
-  let current = from.pop();
-  origin.push(current);
-  final.push(current);
-  restpreHelper(from, origin, final);
+  // const copyHelper = <T>(from: Stack<T>, to: Stack<T>) => {
+  //   if (from.isEmpty()) return;
+  //   to.push(from.pop());
+  //   return copyHelper(from, to);
+  // };
+
+  // const restpreHelper = <T>(
+  //   from: Stack<T>,
+  //   origin: Stack<T>,
+  //   final: Stack<T>
+  // ) => {
+  //   if (from.isEmpty()) return;
+  //   let current = from.pop();
+  //   origin.push(current);
+  //   final.push(current);
+  //   restpreHelper(from, origin, final);
 };
 
 export const copyStackFromStack = <T>(s: Stack<T>): Stack<T> => {
